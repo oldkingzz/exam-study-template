@@ -1,0 +1,35 @@
+# [COURSE NAME] Exam Prep
+
+## Goal
+Help prepare for [COURSE NAME] [exam type: midterm/final] on [DATE].
+
+## Exam Format
+- Duration: [X] minutes + [Y] minutes to scan
+- Open/Closed book: [closed book / open book / one cheat sheet allowed]
+- Number of problems: [X], max points: [X]
+- Question types: [True/False, short answer, derivation, design, etc.]
+
+## Key Topics
+<!-- List each chapter/topic with its point value from past exams -->
+- **Chapter X (XX pts):** [topic list]
+- **Chapter Y (YY pts):** [topic list]
+
+## Available Materials
+<!-- Put all raw materials in raw/ folder -->
+- Lecture slides: `raw/01.pdf` to `raw/XX.pdf`
+  - Skip: [list chapters to skip]
+  - Focus: [list key chapters]
+- Homework: `raw/HW/`
+- Past exams: `raw/[filename]`
+
+## Study Materials (AI-generated, in `study/`)
+1. Per-chapter Complete Guide
+2. Cheat sheet (one-page, LaTeX formatted)
+3. Mock test analysis
+4. Final rapid-fire test
+
+## Rules
+<!-- Customize to your preferences -->
+- [Language preference, e.g., "Explain in Chinese, write answers in English"]
+- [Answer format requirements]
+- [Other constraints]

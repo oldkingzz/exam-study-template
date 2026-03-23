@@ -1,0 +1,9 @@
+# Raw materials (too large for git)
+raw/*.pdf
+raw/*.zip
+
+# OS files
+.DS_Store
+
+# Claude Code
+.claude/
