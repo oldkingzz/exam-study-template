@@ -33,3 +33,4 @@ Help prepare for [COURSE NAME] [exam type: midterm/final] on [DATE].
 - [Language preference, e.g., "Explain in Chinese, write answers in English"]
 - [Answer format requirements]
 - [Other constraints]
+- **First-principles is the core learning principle**: every Complete Guide must include a "why does this exist / what's the root / from which deeper premise does it follow" angle, marked with `> 💡 **First Principles**:`. For root questions that need long exposition, tease briefly in the guide (state the conclusion + point to QA) and put the deep-dive in a separate QA file — keep the guide lean, let QA absorb the depth.
