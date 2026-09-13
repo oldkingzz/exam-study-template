@@ -166,10 +166,19 @@ def main(path):
         errors.append("no .solution found")
     sol_section = ids.get("solutions")
     if sol_section is not None:
-        cjk_hits = [m.group(0) for m in CJK.finditer(sol_section.alltext())]
+        # The submittable text must be English; a lesson-language walkthrough is
+        # allowed only inside elements carrying class "zh".
+        def text_outside_zh(n):
+            if "zh" in n.classes():
+                return ""
+            return " ".join(n.text) + " " + " ".join(text_outside_zh(c) for c in n.children)
+        cjk_hits = [m.group(0) for m in CJK.finditer(text_outside_zh(sol_section))]
         if cjk_hits:
             sample = "".join(cjk_hits[:12])
-            errors.append(f"#solutions contains {len(cjk_hits)} CJK character(s) — solutions must be English only (e.g. '{sample}')")
+            errors.append(f"#solutions contains {len(cjk_hits)} CJK character(s) outside .zh blocks — the submittable text must be English only (e.g. '{sample}')")
+        for s in root.find("solution"):
+            if not s.has("zh"):
+                warns.append(f"solution #{s.attrs.get('id')}: no .zh walkthrough block (bilingual rule)")
     card_ids = {c.attrs.get("id") for c in cards}
     for s in sols:
         sid = s.attrs.get("id", "<no id>")

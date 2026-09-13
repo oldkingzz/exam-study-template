@@ -40,7 +40,8 @@ MathJax is loaded from jsDelivr (`tex-mml-chtml.js`); inline math `\( … \)`, d
 | per-lecture recap | `<div class="recap">` | ≥1 per lecture section |
 | per-lecture pitfalls | `<div class="pitfall">` | ≥1 per lecture section |
 | lecture section | `<section class="lecture" id="l1">` | ≥1 |
-| one homework answer | `<article class="solution" id="sol-q2-1" data-q="Q2.1">` | must contain ≥1 `<a href="#card-id">` to an existing card and one `.final`; **no CJK characters anywhere in `#solutions`** |
+| one homework answer | `<article class="solution" id="sol-q2-1" data-q="Q2.1">` | must contain ≥1 `<a href="#card-id">` to an existing card and one `.final`; **no CJK characters in `#solutions` outside `.zh` blocks** |
+| lesson-language walkthrough inside a solution | `<div class="zh">` — first thing in the solution, labelled "not for submission" | warned if missing; the only place CJK is allowed in `#solutions` |
 | boxed final answer | `<div class="final">` | required in every solution |
 
 ## Skeleton (copy, then fill)
