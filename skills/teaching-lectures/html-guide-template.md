@@ -31,6 +31,8 @@ MathJax is loaded from jsDelivr (`tex-mml-chtml.js`); inline math `\( … \)`, d
 | tag chip in the header | `<span class="tag">记 / 推 / 了解</span>` | present |
 | homework link in the header | `<a class="hw-badge" href="#sol-q2-1">考点 · HW1 Q2.1</a>` | href must resolve to a `.solution` id |
 | hook | `<p class="hook">` | — |
+| plain explanation (用人话说) | `<div class="plain">` — before `.top` | required on memorize/derive |
+| glossary | `<section id="glossary">` with a table: plain name · English / abbreviation · one-sentence meaning | required; every ALL-CAPS abbreviation used in `#lesson` must appear in it |
 | boxed statement | `<div class="statement">` | required on memorize/derive |
 | worked example | `<div class="example">` | required on memorize/derive |
 | modern application | `<div class="app">` | required on memorize/derive |
@@ -146,6 +148,7 @@ Card layout that satisfies the rules:
 <article class="card" id="c-…" data-tag="derive">
   <h3>标题 <span class="tag">推</span> <a class="hw-badge" href="#sol-q2-1">考点 · HW1 Q2.1</a></h3>
   <p class="hook">一句话直觉</p>
+  <div class="plain">用人话说:3–6 句,不出现符号;说清它是什么、为什么要管它、名字(含缩写逐字母)是什么意思。</div>
   <div class="top">
     <div class="widget" data-widget="joinmeet">…</div>          <!-- or <svg> / <table> -->
     <div class="statement">…≤5 bullets or 2 formulas + 3 bullets…</div>

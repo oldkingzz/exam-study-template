@@ -6,15 +6,29 @@
 - What the evidence says (and the sources)
 - Pitfalls that make guides fail
 
+## Plain language (说人话) — the rule that overrides the others
+
+The reader is a **complete beginner**: assume they know vector addition, the dot product, and matrix multiplication, and nothing else — remind them what a cross product is the first time it appears. A term they cannot decode is not "dense", it is a wall; every unexplained word after it is lost, and every self-check after it fails. The second version of a guide failed exactly here: the text budget was met by compressing explanations into jargon and abbreviations.
+
+- **Every technical term, first time**: plain-language name in the reader's language → one sentence saying what it is in everyday terms → then the English term and its abbreviation, with the abbreviation *spelled out letter by letter* ("BRDF = Bidirectional 双向 · Reflectance 反射 · Distribution 分布 · Function 函数 — a lookup table of 'light comes in from here, I look from there, how bright'"). After that, use whichever name is shorter.
+- **Every formula is read aloud first**: one sentence "this equation says …" in words with no symbols, *then* the formula, *then* each symbol explained with an everyday object, never with another term.
+- **Abbreviations in application tabs too** (VIO, SLAM, PBR, HDR, CCD …): expand or replace with a plain description ("the positioning system inside a drone"). Name-dropping a system the reader has never heard of teaches nothing.
+- **A glossary at the top** (`#glossary`): every term and abbreviation used anywhere in the lesson, three columns — plain name · English / abbreviation · one-sentence meaning. The gate cross-checks abbreviations against it.
+- **Self-checks are tiered**: first "say it in your own words" (with a model answer in plain words), then a computation. A self-check that only asks for a computation tests nothing if the words were not understood.
+- **The read-through test** (workflow step 8): read as someone who has never seen the topic; any word not explained on this page before its use is a defect, not a style choice.
+
+Plain language and the text budget are not in tension: the budget cuts *restatement and decoration*; explanation in everyday words is the content and stays.
+
 ## The five-part card
 
-Every 记 / 推 concept is one `.card` with these parts in this order. 了解 concepts use only parts 1–2 collapsed into two lines.
+Every 记 / 推 concept is one `.card` with these parts in this order. 了解 concepts use only parts 1–2 collapsed into a short paragraph that still obeys the plain-language rule.
 
 1. **直觉 (hook)** — one concrete situation the student has seen with their own eyes, *before any symbol*. ("Why does a phone photo at night come out smeared?") One to three sentences.
-2. **定义 / 公式 (the statement)** — the thing to remember, boxed. Name every symbol on the line where it first appears. For 推 cards this is where the ≤ 5-line derivation lives, each line justified in a few words.
-3. **算一遍 (worked example)** — real numbers, every intermediate step written out, ending in a checked result ("substitute back: 1−2+1=0 ✓"). Choose numbers that make the arithmetic visible, not heroic.
-4. **现在哪里用 (modern application)** — one named system, product, or paper family where this exact idea is load-bearing today (AprilTag, ARKit plane detection, NeRF, OpenCV `calibrateCamera`, panorama stitching …). One or two sentences; say *which part* of the idea the application relies on.
-5. **自测 (self-check)** — one question the student answers from memory, with the answer hidden in `<details>`. For 记 cards ask for the statement; for 推 cards ask for the derivation or a fresh numeric instance. Where possible interleave: reuse a symbol or object from an earlier card.
+2. **用人话说 (plain explanation, `.plain`)** — three to six sentences in everyday words that fully explain the idea *without symbols*: what the thing is, why anyone cares, what the name means (abbreviation spelled out). A reader who stops here should already understand the concept; the formula below only makes it precise.
+3. **定义 / 公式 (the statement)** — the thing to remember, boxed. Open with the formula read aloud in words. Name every symbol on the line where it first appears, with an everyday referent. For 推 cards this is where the ≤ 5-line derivation lives, each line justified in a few words.
+4. **算一遍 (worked example)** — real numbers, every intermediate step written out, ending in a checked result ("substitute back: 1−2+1=0 ✓"). Choose numbers that make the arithmetic visible, not heroic.
+5. **现在哪里用 (modern application)** — one system or product the reader has plausibly touched (the phone's night mode, a panorama, a car's surround camera), described in plain words, then the technical name in parentheses. Say *which part* of the idea it relies on.
+6. **自测 (self-check)** — two tiers, answers hidden in `<details>`: (a) "用自己的话说一遍" with a model answer in plain words; (b) a computation or derivation. Where possible interleave: reuse a symbol or object from an earlier card.
 
 A card that a homework question depends on also carries a **考点** badge (`.hw-badge`) naming the question, placed in the card header so it is visible while skimming.
 
@@ -56,5 +70,6 @@ Sources (primary write-ups, not summaries): The Learning Scientists, *Six Strate
 - **Multiple-choice answered by listing the right letters.** Fix: every option gets a verdict and a reason; that is where the learning is.
 - **Unverified arithmetic.** Fix: Step 4 of the workflow — solve in a script first.
 - **Answers visible by default.** Fix: `<details>`; the student must be able to attempt first.
+- **Jargon as content.** Cards that are bullets of terms and abbreviations; the reader reports "I can't understand any of it, what is BRDF". Fix: the plain-language rule; the `.plain` block is mandatory and comes before the formula; every abbreviation is in the glossary.
 - **Markdown in HTML clothing.** Paragraph after paragraph, a table or two, no interaction — the reader reports "reading this feels like reading a .md". Fix: the HTML-native rules above; cut text until the visual carries the idea.
 - **Lesson language leaking into solutions.** Fix: the solutions section is written only in the submission language; the gate rejects CJK characters there (extend the regex if your lesson language is a different script).

@@ -13,8 +13,12 @@ from html.parser import HTMLParser
 TAGS = {"memorize", "derive", "aware"}
 # Visible characters per card before it starts reading like a wall of text
 # (roughly hook + statement + one open tab at the pedagogy.md budget).
-VISIBLE_BUDGET = 900
+VISIBLE_BUDGET = 1400
 CJK = re.compile(r"[぀-ヿ㐀-䶿一-鿿豈-﫿＀-￯]")
+# An abbreviation is 3+ consecutive capitals/digits starting with a capital (BRDF, CCD, RP2 is not matched: mixed case).
+ABBR = re.compile(r"(?<![A-Za-z])[A-Z][A-Z0-9]{2,}(?![a-z])")
+# Tokens that look like abbreviations but are not terms to define.
+ABBR_IGNORE = {"OK", "MIT", "PDF", "URL", "HTML", "SVG", "CSS", "MATHJAX", "ET", "EDT", "HW1", "HW2", "HW3", "HW4", "HW5"}
 
 
 class Node:
@@ -107,7 +111,7 @@ def main(path):
         if not c.has("tag"):
             errors.append(f"card #{cid}: missing .tag chip")
         if tag in ("memorize", "derive"):
-            for need in ("statement", "example", "app", "selfcheck"):
+            for need in ("plain", "statement", "example", "app", "selfcheck"):
                 if not c.has(need):
                     errors.append(f"card #{cid} ({tag}): missing .{need}")
             visual = c.has("widget") or any(n.tag in ("svg", "canvas", "table") for n in c.walk())
@@ -144,6 +148,18 @@ def main(path):
                 errors.append(f"lecture #{lid}: missing .{need} block")
         if not L.find("card"):
             errors.append(f"lecture #{lid}: has no cards")
+
+    # glossary: every abbreviation used in the lesson must be defined there
+    lesson = ids.get("lesson")
+    gloss = ids.get("glossary")
+    if gloss is None:
+        errors.append("missing #glossary section (plain-language rule)")
+    elif lesson is not None:
+        used = set(ABBR.findall(lesson.alltext()))
+        defined = set(ABBR.findall(gloss.alltext()))
+        missing = sorted(used - defined - ABBR_IGNORE)
+        if missing:
+            errors.append(f"abbreviations used in #lesson but not in #glossary: {', '.join(missing)}")
 
     sols = root.find("solution")
     if not sols:
